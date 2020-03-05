@@ -1,0 +1,1 @@
+# Comunicação entre seviços com RabbitMQ
