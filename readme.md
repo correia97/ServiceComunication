@@ -3,6 +3,7 @@
 Projeto de estudo de filas utilizando rabbitmq e .Net Core 3.1
 
 **Objetivos**
+
 Criar dois ou mais serviços que publicam mensagens em um fila do rabbit e trabalha como worker de outra fila
 
 ## Dependências
@@ -30,4 +31,11 @@ Via terminal navegue até a pasta onde está o arquivo Service.sln e execute o c
 ```bash
 docker-compose up --build
 ```
-Este comando vai baixar as imagens necessárias, compilar o projeto e criar as imagens com as aplicações .net executar os container na mesma rede para que eles possam se comunicar
+
+Este comando vai baixar as imagens necessárias, compilar o projeto e criar as imagens com as aplicações .net executar os container na mesma rede para que eles possam se comunicar. Obs.: As Duas Api's estão com uma tempo de inicialização de 2min para garantir que o rabbit já está em execução
+
+A API1 vai ser executada na porta 3001 
+
+A API2 vai ser executada na porta 3002
+
+O manager do RabbitMQ vai ser executado na porta 6672

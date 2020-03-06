@@ -9,10 +9,14 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Micro2", "src\Micro2\Micro2
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{81F60750-E94A-4254-8AF5-F36E6DE52C33}"
 	ProjectSection(SolutionItems) = preProject
+		docker-compose.yml = docker-compose.yml
+		Dockerfile-api1 = Dockerfile-api1
+		Dockerfile-api2 = Dockerfile-api2
 		global.json = global.json
+		readme.md = readme.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infra.Services", "src\Infra.Services\Infra.Services.csproj", "{DF9BF27E-5B47-4DC8-8920-3E20DAC13196}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infra.Services", "src\Infra.Services\Infra.Services.csproj", "{DF9BF27E-5B47-4DC8-8920-3E20DAC13196}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

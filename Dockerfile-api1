@@ -1,20 +1,30 @@
+# Imagem com SDK para fazer o build da aplicação
 FROM mcr.microsoft.com/dotnet/core/sdk:3.1-alpine3.11 as build
 
+# Diretório onde os arquivos serão copiados e onde os comandos serão executados
 WORKDIR /app
 
+# Todos os arquivos da pasta corrende para dentro do container
 COPY . ./
 
+# Executa o comando de restore dos pacotes
 RUN dotnet restore 
 
-RUN dotnet build 
+# executa o build do projeto
+RUN dotnet build  -c Release
 
+# publica o projeto na pasta out
 RUN dotnet publish  src/Micro1/Micro1.csproj -c Release -o out
 
+# Imgem com Runtime para executar o projeto
 FROM mcr.microsoft.com/dotnet/core/aspnet:3.1-alpine3.11
 
+# Diretório onde os arquivos serão copiados e onde os comandos serão executados
 WORKDIR /app
+
 # Copia os arquivos publicados do container de build para o container final
 COPY --from=build /app/out .
+
 # Define qual o executavel do container
-ENTRYPOINT [ "dotnet","Micro1.dll"]
+ENTRYPOINT [ "dotnet","Micro1.dll","--environment=Docker"]
 

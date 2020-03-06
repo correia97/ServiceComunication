@@ -37,8 +37,7 @@ services:
       RABBITMQ_DEFAULT_PASS: mudar12345
     # portas do host onde por onde podemos acessar o conatainer  
     ports:
-       - 15672:15672 
-       - 5672:5672
+       - 25672:15672
     networks: 
       - services
 # redes que serão criadas      
