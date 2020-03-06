@@ -9,6 +9,7 @@ using RabbitMQ.Client.Events;
 using System;
 using System.Diagnostics;
 using System.Text;
+using System.Threading;
 
 namespace Infra.Service.Services
 {
@@ -88,12 +89,12 @@ namespace Infra.Service.Services
 
         public static void CreateQueueReader(IConfiguration configuration, IMessageHandler handler)
         {
+
+            Thread.Sleep(TimeSpan.FromMinutes(2));
             var retryOnStartupPolicy = Policy
-       //.HandleInner<StackExchange.Redis.RedisConnectionException>()
-       .Handle<Exception>()
-       .WaitAndRetry(9, retryAttempt =>
-            TimeSpan.FromSeconds(Math.Pow(10, retryAttempt))
-        );
+                                       .Handle<Exception>()
+                                       .WaitAndRetry(9, retryAttempt =>
+                                            TimeSpan.FromSeconds(Math.Pow(10, retryAttempt)));
 
             var conf = configuration.GetSection("rabbit");
             var txtConnection = conf["connection"].Trim();

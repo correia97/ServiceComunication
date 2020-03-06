@@ -22,3 +22,12 @@ Criar dois ou mais serviços que publicam mensagens em um fila do rabbit e traba
 |rabbitmq |`3.7-management-alpine`|
 |mcr.microsoft.com/dotnet/core/sdk |`3.1-alpine3.11` |
 |mcr.microsoft.com/dotnet/core/aspnet|`3.1-alpine3.11`|
+
+
+### Executando projeto com Docker
+
+Via terminal navegue até a pasta onde está o arquivo Service.sln e execute o comando
+```bash
+docker-compose up --build
+```
+Este comando vai baixar as imagens necessárias, compilar o projeto e criar as imagens com as aplicações .net executar os container na mesma rede para que eles possam se comunicar

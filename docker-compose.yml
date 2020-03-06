@@ -3,14 +3,17 @@ services:
   # Api1
   api1:
     build: 
+      # Pasta onde vai ocorrer o build
       context: ./
+      # Nome do arquivo que vai gerar a imagem
       dockerfile: Dockerfile-api1 
+    # Porta do host onde a aaplicação pode ser acessada 
     ports:
       - 3001:80
+    # Rede que o container vai estar conectado  
     networks: 
       - services
-    links: 
-      - rabbit 
+    # Serviços do qual a aplicação depende  
     depends_on:
       - rabbit     
   # Api2
@@ -22,20 +25,22 @@ services:
       - 3002:80 
     networks: 
       - services
-    links: 
-      - rabbit
     depends_on:
       - rabbit
   #  Imagem Oficial do rabbit
   rabbit:
+    # imagem do rabbit que será utilizada
     image: rabbitmq:3.7-management-alpine
+    # parametros da imagem
     environment: 
       RABBITMQ_DEFAULT_USER: adm_user
       RABBITMQ_DEFAULT_PASS: mudar12345
+    # portas do host onde por onde podemos acessar o conatainer  
     ports:
        - 15672:15672 
        - 5672:5672
     networks: 
       - services
+# redes que serão criadas      
 networks:
   services:
