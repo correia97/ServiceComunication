@@ -92,7 +92,7 @@ namespace Infra.Service.Services
        //.HandleInner<StackExchange.Redis.RedisConnectionException>()
        .Handle<Exception>()
        .WaitAndRetry(9, retryAttempt =>
-            TimeSpan.FromSeconds(Math.Pow(2, retryAttempt))
+            TimeSpan.FromSeconds(Math.Pow(10, retryAttempt))
         );
 
             var conf = configuration.GetSection("rabbit");

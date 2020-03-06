@@ -1,5 +1,31 @@
-version: '3'
-services:
+version: '3.7'
+services:  
+  # Api1
+  api1:
+    build: 
+      context: ./
+      dockerfile: Dockerfile-api1 
+    ports:
+      - 3001:80
+    networks: 
+      - services
+    links: 
+      - rabbit 
+    depends_on:
+      - rabbit     
+  # Api2
+  api2:
+    build: 
+      context: ./
+      dockerfile: Dockerfile-api2    
+    ports:
+      - 3002:80 
+    networks: 
+      - services
+    links: 
+      - rabbit
+    depends_on:
+      - rabbit
   #  Imagem Oficial do rabbit
   rabbit:
     image: rabbitmq:3.7-management-alpine
@@ -10,29 +36,6 @@ services:
        - 15672:15672 
        - 5672:5672
     networks: 
-      - services    
-  # Api1
-  api1:
-    build: 
-      context: ./src
-      dockerfile: Dockerfile-api1 
-    depends_on:
-      - rabbit
-    ports:
-      - 3001:80
-    networks: 
-      - services      
-  # Api2
-  api2:
-    build: 
-      context: ./src
-      dockerfile: Dockerfile-api2
-    depends_on:
-      - rabbit
-    ports:
-      - 3002:80 
-    networks: 
-      - services   
-
+      - services
 networks:
   services:

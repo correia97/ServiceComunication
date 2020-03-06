@@ -16,7 +16,7 @@ namespace Micro2
                 {
                     webBuilder
                     .UseStartup<Startup>()
-                    .UseUrls("https://*:5002");
+                    .UseUrls("http://*:80");
                 });
     }
 }

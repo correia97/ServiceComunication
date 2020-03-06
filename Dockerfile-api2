@@ -4,11 +4,11 @@ WORKDIR /app
 
 COPY . ./
 
-RUN dotnet restore Micro2/Micro2.csproj
+RUN dotnet restore 
 
-RUN dotnet build Micro2/Micro2.csproj -c Release
+RUN dotnet build  -c Release
 
-RUN dotnet publish  Micro2/Micro2.csproj -c Release -o out
+RUN dotnet publish  src/Micro2/Micro2.csproj -c Release -o out
 
 FROM mcr.microsoft.com/dotnet/core/aspnet:3.1-alpine3.11
 
