@@ -26,4 +26,4 @@ WORKDIR /app
 COPY --from=build /app/out .
 
 # Define qual o executavel do container
-ENTRYPOINT [ "dotnet","Micro2.dll","--environment=Docker"]
+ENTRYPOINT [ "dotnet","Micro2.dll"]

@@ -1,7 +1,8 @@
-version: '3.7'
+version: '3'
 services:  
   # Api1
   api1:
+    image: communicationapi1
     build: 
       # Pasta onde vai ocorrer o build
       context: ./
@@ -18,6 +19,7 @@ services:
       - rabbit     
   # Api2
   api2:
+    image: communicationapi2
     build: 
       context: ./
       dockerfile: Dockerfile-api2    
@@ -27,7 +29,7 @@ services:
       - services
     depends_on:
       - rabbit
-  #  Imagem Oficial do rabbit
+  # Imagem Oficial do rabbit
   rabbit:
     # imagem do rabbit que será utilizada
     image: rabbitmq:3.7-management-alpine

@@ -1,0 +1,9 @@
+ #az group create --name clitest -l brazilsouth -o yaml
+id: /subscriptions/69b992a8-292b-4514-a05c-36284db1f0ef/resourceGroups/clitest
+location: brazilsouth
+managedBy: null
+name: clitest
+properties:
+  provisioningState: Succeeded
+tags: null
+type: Microsoft.Resources/resourceGroups

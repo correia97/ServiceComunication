@@ -42,7 +42,7 @@ namespace Infra.Service.Services
                 consumer.Received += (model, ea) =>
                 {
                     var body = ea.Body;
-                    var txtMessage = Encoding.UTF8.GetString(body);
+                    var txtMessage = Encoding.UTF8.GetString(body.ToArray());
                     channel.BasicAck(deliveryTag: ea.DeliveryTag, multiple: false);
                     message = JsonConvert.DeserializeObject<T>(txtMessage);
                 };
@@ -115,7 +115,7 @@ namespace Infra.Service.Services
                 consumer.Received += (model, ea) =>
                 {
                     var body = ea.Body;
-                    var txtMessage = Encoding.UTF8.GetString(body);
+                    var txtMessage = Encoding.UTF8.GetString(body.ToArray());
                     channel.BasicAck(deliveryTag: ea.DeliveryTag, multiple: false);
                     handler.Handler(JsonConvert.DeserializeObject<QueueMessage>(txtMessage));
 

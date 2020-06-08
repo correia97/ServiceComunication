@@ -1,0 +1,35 @@
+#az appservice plan create --name testecliplan --resource-group clitest --sku FREE -o yaml
+freeOfferExpirationTime: null
+geoRegion: Brazil South
+hostingEnvironmentProfile: null
+hyperV: false
+id: /subscriptions/69b992a8-292b-4514-a05c-36284db1f0ef/resourceGroups/clitest/providers/Microsoft.Web/serverfarms/testecliplan
+isSpot: false
+isXenon: false
+kind: app
+location: Brazil South
+maximumElasticWorkerCount: 1
+maximumNumberOfWorkers: 1
+name: testecliplan
+numberOfSites: 0
+perSiteScaling: false
+provisioningState: Succeeded
+reserved: false
+resourceGroup: clitest
+sku:
+  capabilities: null
+  capacity: 0
+  family: F
+  locations: null
+  name: F1
+  size: F1
+  skuCapacity: null
+  tier: Free
+spotExpirationTime: null
+status: Ready
+subscription: 69b992a8-292b-4514-a05c-36284db1f0ef
+tags: null
+targetWorkerCount: 0
+targetWorkerSizeId: 0
+type: Microsoft.Web/serverfarms
+workerTierName: null

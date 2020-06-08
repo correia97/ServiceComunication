@@ -1,0 +1,66 @@
+ az webapp create --name pecapi2 --resource-group clitest --plan testecliplan -r DOTNETCORE|latest -o yaml
+availabilityState: Normal
+clientAffinityEnabled: true
+clientCertEnabled: false
+clientCertExclusionPaths: null
+cloningInfo: null
+containerSize: 0
+dailyMemoryTimeQuota: 0
+defaultHostName: pecapi1.azurewebsites.net
+enabled: true
+enabledHostNames:
+- pecapi1.azurewebsites.net
+- pecapi1.scm.azurewebsites.net
+ftpPublishingUrl: ftp://waws-prod-cq1-019.ftp.azurewebsites.windows.net/site/wwwroot
+hostNameSslStates:
+- hostType: Standard
+  ipBasedSslResult: null
+  ipBasedSslState: NotConfigured
+  name: pecapi1.azurewebsites.net
+  sslState: Disabled
+  thumbprint: null
+  toUpdate: null
+  toUpdateIpBasedSsl: null
+  virtualIp: null
+- hostType: Repository
+  ipBasedSslResult: null
+  ipBasedSslState: NotConfigured
+  name: pecapi1.scm.azurewebsites.net
+  sslState: Disabled
+  thumbprint: null
+  toUpdate: null
+  toUpdateIpBasedSsl: null
+  virtualIp: null
+hostNames:
+- pecapi1.azurewebsites.net
+hostNamesDisabled: false
+hostingEnvironmentProfile: null
+httpsOnly: false
+hyperV: false
+id: /subscriptions/69b992a8-292b-4514-a05c-36284db1f0ef/resourceGroups/clitest/providers/Microsoft.Web/sites/pecapi1
+identity: null
+inProgressOperationId: null
+isDefaultContainer: null
+isXenon: false
+kind: app
+lastModifiedTimeUtc: '2020-03-10T19:18:11.213333'
+location: Brazil South
+maxNumberOfWorkers: null
+name: pecapi1
+outboundIpAddresses: 191.233.203.34,191.232.48.69,191.232.169.24,191.232.52.16,191.239.251.52
+possibleOutboundIpAddresses: 191.233.203.34,191.232.48.69,191.232.169.24,191.232.52.16,191.239.251.52,191.237.252.188,191.234.162.82,191.232.49.124,191.232.55.149,191.232.49.236
+redundancyMode: None
+repositorySiteName: pecapi1
+reserved: false
+resourceGroup: clitest
+scmSiteAlsoStopped: false
+serverFarmId: /subscriptions/69b992a8-292b-4514-a05c-36284db1f0ef/resourceGroups/clitest/providers/Microsoft.Web/serverfarms/testecliplan
+siteConfig: null
+slotSwapStatus: null
+state: Running
+suspendedTill: null
+tags: null
+targetSwapSlot: null
+trafficManagerHostNames: null
+type: Microsoft.Web/sites
+usageState: Normal

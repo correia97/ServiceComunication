@@ -25,6 +25,7 @@ WORKDIR /app
 # Copia os arquivos publicados do container de build para o container final
 COPY --from=build /app/out .
 
+
 # Define qual o executavel do container
-ENTRYPOINT [ "dotnet","Micro1.dll","--environment=Docker"]
+ENTRYPOINT [ "dotnet","Micro1.dll"]
 
