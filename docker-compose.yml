@@ -8,6 +8,8 @@ services:
       context: ./
       # Nome do arquivo que vai gerar a imagem
       dockerfile: Dockerfile-api1 
+      args:
+        - sonarLogin=$sonarLogin
     # Porta do host onde a aaplicação pode ser acessada 
     ports:
       - 3001:80
@@ -22,7 +24,9 @@ services:
     image: communicationapi2
     build: 
       context: ./
-      dockerfile: Dockerfile-api2    
+      dockerfile: Dockerfile-api2       
+      args:
+        - sonarLogin=$sonarLogin   
     ports:
       - 3002:80 
     networks: 

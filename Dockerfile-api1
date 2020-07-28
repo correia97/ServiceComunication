@@ -1,17 +1,29 @@
-# Imagem com SDK para fazer o build da aplicaÁ„o
-FROM mcr.microsoft.com/dotnet/core/sdk:3.1-alpine3.11 as build
+# Imagem com SDK para fazer o build da aplica√ß√£o
+FROM correia97/netcoresdksonar:3.1-alpine3.12 as build
 
-# DiretÛrio onde os arquivos ser„o copiados e onde os comandos ser„o executados
+# Diret√≥rio onde os arquivos ser√£o copiados e onde os comandos ser√£o executados
 WORKDIR /app
 
 # Todos os arquivos da pasta corrende para dentro do container
 COPY . ./
 
+# Argumento informado durante o build
+ARG sonarLogin
+
 # Executa o comando de restore dos pacotes
 RUN dotnet restore 
 
+# Start do scanner
+RUN dotnet sonarscanner begin /k:"service_comunication" \
+                              /o:"correia97" /d:sonar.host.url="https://sonarcloud.io" \
+                              /d:sonar.login=$sonarLogin \
+                              /d:sonar.exclusions=**/*.js,**/*.css,**/obj/**,**/*.dll,**/*.html,**/*.cshtml,*-project.properties
+
 # executa o build do projeto
 RUN dotnet build  -c Release
+
+# Realiza a Analise
+RUN dotnet sonarscanner end /d:sonar.login=$sonarLogin 
 
 # publica o projeto na pasta out
 RUN dotnet publish  src/Micro1/Micro1.csproj -c Release -o out
@@ -19,7 +31,7 @@ RUN dotnet publish  src/Micro1/Micro1.csproj -c Release -o out
 # Imgem com Runtime para executar o projeto
 FROM mcr.microsoft.com/dotnet/core/aspnet:3.1-alpine3.11
 
-# DiretÛrio onde os arquivos ser„o copiados e onde os comandos ser„o executados
+# Diret√≥rio onde os arquivos ser√£o copiados e onde os comandos ser√£o executados
 WORKDIR /app
 
 # Copia os arquivos publicados do container de build para o container final

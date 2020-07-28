@@ -1,7 +1,7 @@
-# Imagem com SDK para fazer o build da aplicaÁ„o
-FROM mcr.microsoft.com/dotnet/core/sdk:3.1-alpine3.11 as build
+# Imagem com SDK para fazer o build da aplica√ß√£o
+FROM correia97/netcoresdksonar:3.1-alpine3.12  as build
 
-# DiretÛrio onde os arquivos ser„o copiados e onde os comandos ser„o executados
+# Diret√≥rio onde os arquivos ser√£o copiados e onde os comandos ser√£o executados
 WORKDIR /app
 
 # Todos os arquivos da pasta corrende para dentro do container
@@ -19,7 +19,7 @@ RUN dotnet publish  src/Micro2/Micro2.csproj -c Release -o out
 # Imgem com Runtime para executar o projeto
 FROM mcr.microsoft.com/dotnet/core/aspnet:3.1-alpine3.11
 
-# DiretÛrio onde os arquivos ser„o copiados e onde os comandos ser„o executados
+# Diret√≥rio onde os arquivos ser√£o copiados e onde os comandos ser√£o executados
 WORKDIR /app
 
 # Copia os arquivos publicados do container de build para o container final
