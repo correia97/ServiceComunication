@@ -10,6 +10,8 @@ services:
       dockerfile: Dockerfile-api1 
       args:
         - sonarLogin=$sonarLogin
+    environment:
+        - ASPNETCORE_ENVIRONMENT=Docker
     # Porta do host onde a aaplicação pode ser acessada 
     ports:
       - 3001:80
@@ -26,7 +28,9 @@ services:
       context: ./
       dockerfile: Dockerfile-api2       
       args:
-        - sonarLogin=$sonarLogin   
+        - sonarLogin=$sonarLogin 
+    environment:
+        - ASPNETCORE_ENVIRONMENT=Docker        
     ports:
       - 3002:80 
     networks: 
