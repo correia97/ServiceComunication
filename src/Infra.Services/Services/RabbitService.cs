@@ -15,7 +15,6 @@ namespace Infra.Service.Services
 {
     public class RabbitService : IQueueService
     {
-        private string Connection { get; set; }
         private string QueueRead { get; set; }
         private string QueuePublish { get; set; }
         private ConnectionFactory Factory { get; set; }
@@ -23,12 +22,20 @@ namespace Infra.Service.Services
         public RabbitService(IConfiguration configuration, IMessageHandler handler)
         {
             var conf = configuration.GetSection("rabbit");
-            Connection = conf["connection"].Trim();
+            var rabbitMQEndpointHostname = conf["host"].Trim();
+            var rabbitMQEndpointAMQPPort = int.Parse(conf["port"].Trim());
+            var dockerContainerUsername = conf["user"].Trim();
+            var dockerContainerPassword = conf["password"].Trim();
+            var dockerContainerVirtualHost = conf["virtualhost"].Trim();
             QueueRead = conf["read"].Trim();
             QueuePublish = conf["publish"].Trim();
             Factory = new ConnectionFactory
             {
-                Uri = new Uri(Connection)
+                HostName = rabbitMQEndpointHostname,
+                Port = rabbitMQEndpointAMQPPort,
+                UserName = dockerContainerUsername,
+                Password = dockerContainerPassword,
+                VirtualHost = dockerContainerVirtualHost,
             };
             MessageHandler = handler;
         }
@@ -97,12 +104,20 @@ namespace Infra.Service.Services
                                             TimeSpan.FromSeconds(Math.Pow(10, retryAttempt)));
 
             var conf = configuration.GetSection("rabbit");
-            var txtConnection = conf["connection"].Trim();
+            var rabbitMQEndpointHostname = conf["host"].Trim();
+            var rabbitMQEndpointAMQPPort = int.Parse(conf["port"].Trim());
+            var dockerContainerUsername = conf["user"].Trim();
+            var dockerContainerPassword = conf["password"].Trim();
+            var dockerContainerVirtualHost = conf["virtualhost"].Trim();
             var queueRead = conf["read"].Trim();
 
             var factory = new ConnectionFactory
             {
-                Uri = new Uri(txtConnection)
+                HostName = rabbitMQEndpointHostname,
+                Port = rabbitMQEndpointAMQPPort,
+                UserName = dockerContainerUsername,
+                Password = dockerContainerPassword,
+                VirtualHost = dockerContainerVirtualHost,
             };
             var connection = factory.CreateConnection();
             var channel = connection.CreateModel();

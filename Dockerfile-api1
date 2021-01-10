@@ -4,14 +4,19 @@ FROM correia97/netcoresdksonar:3.1-alpine3.12 as build
 # Diretório onde os arquivos serão copiados e onde os comandos serão executados
 WORKDIR /app
 
-# Todos os arquivos da pasta corrende para dentro do container
-COPY . ./
+# Arquivos do projeto
+COPY ./src/Micro1/Micro1.csproj ./src/Micro1/
+COPY ./src/Infra.Services/Infra.Services.csproj ./src/Infra.Services/
 
 # Argumento informado durante o build
 ARG sonarLogin
 
 # Executa o comando de restore dos pacotes
-RUN dotnet restore 
+RUN dotnet restore ./src/Micro1/
+
+# Todos os arquivos da pasta corrende para dentro do container
+COPY ./src/Micro1/ ./src/Micro1/
+COPY ./src/Infra.Services/ ./src/Infra.Services/
 
 # Start do scanner
 RUN dotnet sonarscanner begin /k:"service_comunication" \
@@ -20,13 +25,13 @@ RUN dotnet sonarscanner begin /k:"service_comunication" \
                               /d:sonar.exclusions=**/*.js,**/*.css,**/obj/**,**/*.dll,**/*.html,**/*.cshtml,*-project.properties
 
 # executa o build do projeto
-RUN dotnet build  -c Release
+RUN dotnet build  ./src/Micro1/Micro1.csproj -c Release
 
 # Realiza a Analise
 RUN dotnet sonarscanner end /d:sonar.login=$sonarLogin 
 
 # publica o projeto na pasta out
-RUN dotnet publish  src/Micro1/Micro1.csproj -c Release -o out
+RUN dotnet publish  ./src/Micro1/Micro1.csproj -c Release -o out
 
 # Imgem com Runtime para executar o projeto
 FROM mcr.microsoft.com/dotnet/core/aspnet:3.1-alpine3.11

@@ -9,9 +9,15 @@ services:
       # Nome do arquivo que vai gerar a imagem
       dockerfile: Dockerfile-api1 
       args:
-        - sonarLogin=$sonarLogin
+        - sonarLogin=$sonarLogin    
     environment:
-        - ASPNETCORE_ENVIRONMENT=Docker
+        - ASPNETCORE_ENVIRONMENT=Docker     
+        - rabbit.host=rabbit     
+        - rabbit.port=5672       
+        - rabbit.user=adm_user     
+        - rabbit.password=mudar12345
+        - rabbit.read=micro1
+        - rabbit.publish=micro2   
     # Porta do host onde a aaplicação pode ser acessada 
     ports:
       - 3001:80
@@ -30,7 +36,14 @@ services:
       args:
         - sonarLogin=$sonarLogin 
     environment:
-        - ASPNETCORE_ENVIRONMENT=Docker        
+        - ASPNETCORE_ENVIRONMENT=Docker     
+        - rabbit.host=rabbit     
+        - rabbit.port=5672       
+        - rabbit.user=adm_user     
+        - rabbit.password=mudar12345
+        - rabbit.read=micro2
+        - rabbit.publish=micro1    
+        - rabbit.virtualhost=mainHost    
     ports:
       - 3002:80 
     networks: 
@@ -40,14 +53,16 @@ services:
   # Imagem Oficial do rabbit
   rabbit:
     # imagem do rabbit que será utilizada
-    image: rabbitmq:3.7-management-alpine
+    image: rabbitmq:3.8-management
     # parametros da imagem
     environment: 
       RABBITMQ_DEFAULT_USER: adm_user
       RABBITMQ_DEFAULT_PASS: mudar12345
+      RABBITMQ_DEFAULT_VHOST: mainHost
     # portas do host onde por onde podemos acessar o conatainer  
     ports:
-       - 25672:15672
+       - 5672:5672
+       - 15672:15672
     networks: 
       - services
 # redes que serão criadas      

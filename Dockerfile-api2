@@ -4,17 +4,25 @@ FROM correia97/netcoresdksonar:3.1-alpine3.12  as build
 # Diretório onde os arquivos serão copiados e onde os comandos serão executados
 WORKDIR /app
 
-# Todos os arquivos da pasta corrende para dentro do container
-COPY . ./
+# Arquivos do projeto
+COPY ./src/Micro2/Micro2.csproj ./src/Micro2/
+COPY ./src/Infra.Services/Infra.Services.csproj ./src/Infra.Services/
+
+# Argumento informado durante o build
+ARG sonarLogin
 
 # Executa o comando de restore dos pacotes
-RUN dotnet restore 
+RUN dotnet restore ./src/Micro2/
+
+# Todos os arquivos da pasta corrende para dentro do container
+COPY ./src/Micro2/ ./src/Micro2/
+COPY ./src/Infra.Services/ ./src/Infra.Services/
 
 # executa o build do projeto
-RUN dotnet build  -c Release
+RUN dotnet build ./src/Micro2/Micro2.csproj -c Release
 
 # publica o projeto na pasta out
-RUN dotnet publish  src/Micro2/Micro2.csproj -c Release -o out
+RUN dotnet publish  ./src/Micro2/Micro2.csproj -c Release -o out
 
 # Imgem com Runtime para executar o projeto
 FROM mcr.microsoft.com/dotnet/core/aspnet:3.1-alpine3.11
